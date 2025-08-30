@@ -24,12 +24,13 @@ export interface Announcement {
 export interface Officer {
   id: string;
   name: string;
-  title: string;
-  email: string;
+  position: string;
+  user_email: string;
   bio: string;
-  photoUrl: string;
-  joinedAt: string;
-  isActive: boolean;
+  image_url: string;
+  linkedin_url?: string;
+  email?: string;
+  order_index: number;
 }
 
 export interface LinkProps {

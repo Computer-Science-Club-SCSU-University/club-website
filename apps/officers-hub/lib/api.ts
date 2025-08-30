@@ -35,13 +35,16 @@ export interface BackendOfficer {
   user: {
     id: number;
     full_name: string;
-    email: string;
+    role: string;
   };
+  name: string;
   full_name: string;
-  email: string;
+  user_email: string;
   position: string;
   bio: string | null;
   image_url: string | null;
+  linkedin_url: string | null;
+  email: string | null;
   order_index: number;
 }
 
@@ -89,12 +92,12 @@ export interface Announcement {
 export interface Officer {
   id: number;
   name: string;
-  title: string;
+  position: string;
   email: string;
   bio: string;
-  photoUrl: string;
-  joinedAt: string;
-  isActive: boolean;
+  image_url: string;
+  linkedin_url: string;
+  order_index: number;
 }
 
 // API Error class
@@ -271,13 +274,13 @@ export function transformAnnouncement(backendAnnouncement: BackendAnnouncement):
 export function transformOfficer(backendOfficer: BackendOfficer): Officer {
   return {
     id: backendOfficer.id,
-    name: backendOfficer.full_name,
-    title: backendOfficer.position,
-    email: backendOfficer.email,
+    name: backendOfficer.name,
+    position: backendOfficer.position,
+    email: backendOfficer.email || backendOfficer.user_email,
     bio: backendOfficer.bio || '',
-    photoUrl: backendOfficer.image_url || '',
-    joinedAt: '', // Not available from backend, would need to be added
-    isActive: true, // Assuming all fetched officers are active
+    image_url: backendOfficer.image_url || '',
+    linkedin_url: backendOfficer.linkedin_url || '',
+    order_index: backendOfficer.order_index,
   };
 }
 
@@ -372,26 +375,30 @@ export const api = {
     getById: (id: number, getToken?: () => Promise<string | null>) => 
       apiClient.get<BackendOfficer>(`/officers/${id}/`, undefined, getToken),
     
-    create: (data: Omit<Officer, 'id' | 'joinedAt'>, getToken?: () => Promise<string | null>) => 
-      apiClient.post<BackendOfficer>('/officers/', {
-        full_name: data.name,
-        email: data.email,
-        position: data.title,
+    create: (data: Omit<Officer, 'id'>, getToken?: () => Promise<string | null>) => 
+      apiClient.post<BackendOfficer>('/officers/create/', {
+        name: data.name,
+        position: data.position,
         bio: data.bio,
-        image_url: data.photoUrl,
+        image_url: data.image_url,
+        linkedin_url: data.linkedin_url,
+        email: data.email,
+        order_index: data.order_index,
       }, undefined, getToken),
     
     update: (id: number, data: Partial<Officer>, getToken?: () => Promise<string | null>) => 
-      apiClient.patch<BackendOfficer>(`/officers/${id}/`, {
-        ...(data.name && { full_name: data.name }),
-        ...(data.email && { email: data.email }),
-        ...(data.title && { position: data.title }),
-        ...(data.bio && { bio: data.bio }),
-        ...(data.photoUrl && { image_url: data.photoUrl }),
+      apiClient.patch<BackendOfficer>(`/officers/${id}/update/`, {
+        ...(data.name && { name: data.name }),
+        ...(data.position && { position: data.position }),
+        ...(data.bio !== undefined && { bio: data.bio }),
+        ...(data.image_url !== undefined && { image_url: data.image_url }),
+        ...(data.linkedin_url !== undefined && { linkedin_url: data.linkedin_url }),
+        ...(data.email !== undefined && { email: data.email }),
+        ...(data.order_index !== undefined && { order_index: data.order_index }),
       }, undefined, getToken),
     
     delete: (id: number, getToken?: () => Promise<string | null>) => 
-      apiClient.delete(`/officers/${id}/`, undefined, getToken),
+      apiClient.delete(`/officers/${id}/delete/`, undefined, getToken),
   },
 };
 
@@ -431,7 +438,7 @@ export function useApiClient() {
       officers: {
         getAll: useCallback(() => api.officers.getAll(getAuthToken), [getAuthToken]),
         getById: useCallback((id: number) => api.officers.getById(id, getAuthToken), [getAuthToken]),
-        create: useCallback((data: Omit<Officer, 'id' | 'joinedAt'>) => api.officers.create(data, getAuthToken), [getAuthToken]),
+        create: useCallback((data: Omit<Officer, 'id'>) => api.officers.create(data, getAuthToken), [getAuthToken]),
         update: useCallback((id: number, data: Partial<Officer>) => api.officers.update(id, data, getAuthToken), [getAuthToken]),
         delete: useCallback((id: number) => api.officers.delete(id, getAuthToken), [getAuthToken]),
       },

@@ -263,9 +263,6 @@ export default function AnnouncementsView() {
           <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-4">
             <div>
               <h1 className="text-2xl sm:text-3xl font-bold">Announcements</h1>
-              <p className="text-muted-foreground mt-1">
-                Manage announcements that sync with Discord
-              </p>
             </div>
             <Button onClick={handleCreateNew} className="w-full sm:w-auto">
               <Plus className="h-4 w-4 mr-2" />

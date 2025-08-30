@@ -39,6 +39,8 @@ CREATE TABLE officers (
     position VARCHAR(100) NOT NULL,   -- e.g. "VP of Tech", "Treasurer"
     bio TEXT,
     image_url TEXT,
+    linkedin_url TEXT,
+    email TEXT,
     order_index INTEGER DEFAULT 0     -- used to control ordering on frontend
 );
 

@@ -19,6 +19,9 @@ interface AnnouncementEditEditorProps {
   announcementId?: string;
 }
 
+import OfficerCreateEditor from "@/components/editors/OfficerCreateEditor";
+import OfficerEditEditor from "@/components/editors/OfficerEditEditor";
+
 export default function RootPage() {
   const { currentView } = useNavigation();
 
@@ -43,10 +46,10 @@ export default function RootPage() {
         break;
       case 'officers':
         if (currentView.sub === 'create') {
-          return <div>Officer Create Editor (TODO)</div>;
+          return <OfficerCreateEditor />;
         }
-        if (currentView.sub === 'edit') {
-          return <div>Officer Edit Editor (TODO)</div>;
+        if (currentView.sub === 'edit' && currentView.params?.officerId) {
+          return <OfficerEditEditor officerId={currentView.params.officerId} />;
         }
         break;
     }

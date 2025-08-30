@@ -12,7 +12,7 @@ const socialLinks = [
   },
   {
     name: 'Instagram',
-    href: 'https://www.instagram.com/csciclub?igsh=NTc4MTIwNjQ2YQ==',
+    href: 'https://www.instagram.com/csc.at.stcloudstate',
     icon: (
       <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
         <path d="M12.017 0C5.396 0 .029 5.367.029 11.987c0 6.62 5.367 11.987 11.988 11.987s11.987-5.367 11.987-11.987C24.014 5.367 18.647.001 12.017.001zM8.449 16.988c-2.508 0-4.541-2.033-4.541-4.541s2.033-4.541 4.541-4.541 4.541 2.033 4.541 4.541-2.033 4.541-4.541 4.541zm7.116 0c-2.508 0-4.541-2.033-4.541-4.541s2.033-4.541 4.541-4.541 4.541 2.033 4.541 4.541-2.033 4.541-4.541 4.541z"/>

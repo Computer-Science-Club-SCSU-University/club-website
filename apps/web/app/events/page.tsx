@@ -57,7 +57,7 @@ export default function EventsPage() {
       <Navbar />
       <main className="flex-1 pt-16">
         {/* Hero Section */}
-        <section className="py-16">
+        <section className="py-12">
           <div className="container mx-auto px-4 max-w-4xl text-center">
             <h1 className="text-4xl font-bold text-foreground mb-6">
               Events
@@ -69,7 +69,7 @@ export default function EventsPage() {
         </section>
 
         {/* Filter Controls */}
-        <section className="py-8 border-b">
+        <section className="py-6 border-b">
           <div className="container mx-auto px-4 max-w-6xl">
             <div className="flex flex-col sm:flex-row justify-between items-center gap-4">
               <div className="flex space-x-2">
@@ -97,7 +97,7 @@ export default function EventsPage() {
         </section>
 
         {/* Events Grid */}
-        <section className="py-12">
+        <section className="pb-16 pt-8">
           <div className="container mx-auto px-4 max-w-6xl">
             {filteredEvents.length > 0 ? (
               <div className="grid gap-6 md:grid-cols-2">

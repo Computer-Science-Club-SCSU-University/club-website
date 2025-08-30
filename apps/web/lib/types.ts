@@ -37,13 +37,16 @@ export interface BackendOfficer {
   user: {
     id: number;
     full_name: string;
-    email: string;
+    role: string;
   };
+  name: string;
   full_name: string;
-  email: string;
+  user_email: string;
   position: string;
   bio: string | null;
   image_url: string | null;
+  linkedin_url: string | null;
+  email: string | null;
   order_index: number;
 }
 
@@ -72,13 +75,10 @@ export interface Officer {
   id: string;
   name: string;
   role: string;
-  year?: string;
-  program?: string;
   bio: string;
   image?: string;
   email?: string;
   linkedin?: string;
-  github?: string;
 }
 
 // Transform functions
@@ -109,12 +109,11 @@ export function transformAnnouncement(backendAnnouncement: BackendAnnouncement):
 export function transformOfficer(backendOfficer: BackendOfficer): Officer {
   return {
     id: backendOfficer.id.toString(),
-    name: backendOfficer.full_name,
+    name: backendOfficer.name,
     role: backendOfficer.position,
     bio: backendOfficer.bio || '',
     image: backendOfficer.image_url || undefined,
-    email: backendOfficer.email || undefined,
-    // year and program are not available from backend
-    // linkedin and github are not available from backend
+    email: backendOfficer.email || backendOfficer.user_email || undefined,
+    linkedin: backendOfficer.linkedin_url || undefined,
   };
 } 

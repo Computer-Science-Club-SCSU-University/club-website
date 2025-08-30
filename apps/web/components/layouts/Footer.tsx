@@ -14,7 +14,7 @@ const socialLinks = [
   },
   {
     name: 'Instagram',
-    href: 'https://www.instagram.com/csciclub?igsh=NTc4MTIwNjQ2YQ==',
+    href: 'https://www.instagram.com/csc.at.stcloudstate',
     icon: <Instagram className="h-5 w-5" />,
   },
   {

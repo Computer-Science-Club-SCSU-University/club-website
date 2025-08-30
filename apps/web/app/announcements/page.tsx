@@ -97,7 +97,7 @@ function AnnouncementsContent() {
         <Navbar />
         <main className="flex-1 pt-16">
           {/* Hero Section */}
-          <section className="bg-gradient-to-b from-muted/30 to-background py-16">
+          <section className="bg-gradient-to-b from-muted/30 to-background py-12">
             <div className="container mx-auto px-4 max-w-4xl text-center">
               <h1 className="text-4xl font-bold text-foreground mb-6">
                 Announcements
@@ -109,7 +109,7 @@ function AnnouncementsContent() {
           </section>
 
           {/* Search and Filters Skeleton */}
-          <section className="py-8">
+          <section className="py-6">
             <div className="container mx-auto px-4 max-w-4xl">
               <div className="space-y-4">
                 <div className="flex flex-col sm:flex-row gap-3">
@@ -175,7 +175,7 @@ function AnnouncementsContent() {
       <Navbar />
       <main className="flex-1 pt-16">
         {/* Hero Section */}
-        <section className="bg-gradient-to-b from-muted/30 to-background py-16">
+        <section className="bg-gradient-to-b from-muted/30 to-background py-12">
           <div className="container mx-auto px-4 max-w-4xl text-center">
             <h1 className="text-4xl font-bold text-foreground mb-6">
               Announcements
@@ -187,7 +187,7 @@ function AnnouncementsContent() {
         </section>
 
         {/* Search and Filters */}
-        <section className="py-8">
+        <section className="py-6">
           <div className="container mx-auto px-4 max-w-4xl">
             <div className="space-y-4">
               {/* Search and Sort Controls */}
@@ -341,7 +341,7 @@ function AnnouncementsContent() {
         </section>
 
         {/* Stay Connected */}
-        <section className="py-16">
+        <section className="py-12">
           <div className="container mx-auto px-4 max-w-4xl text-center">
             <h2 className="text-3xl font-bold text-foreground mb-6">
               Don't Miss Out

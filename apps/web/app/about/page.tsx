@@ -9,7 +9,7 @@ export default function AboutPage() {
       <Navbar />
       <main className="flex-1 pt-16">
         {/* Hero Section */}
-        <section className="py-16">
+        <section className="py-12">
           <div className="container mx-auto px-4 max-w-4xl text-center">
             <h1 className="text-4xl font-bold text-foreground mb-6">
               About the Computer Science Club
@@ -22,7 +22,7 @@ export default function AboutPage() {
         </section>
 
         {/* Mission & Vision */}
-        <section className="py-16">
+        <section className="pb-12">
           <div className="container mx-auto px-4 max-w-6xl">
             <div className="grid md:grid-cols-2 gap-8">
               <Card className="p-8">
@@ -49,7 +49,7 @@ export default function AboutPage() {
         </section>
 
         {/* Values */}
-        <section className="py-16">
+        <section className="pb-12">
           <div className="container mx-auto px-4 max-w-4xl">
             <h2 className="text-3xl font-bold text-center text-foreground mb-12">Our Values</h2>
             <div className="grid md:grid-cols-3 gap-8">
@@ -93,7 +93,7 @@ export default function AboutPage() {
         </section>
 
         {/* Join Us */}
-        <section className="py-16">
+        <section className="py-12">
           <div className="container mx-auto px-4 max-w-4xl text-center">
             <h2 className="text-3xl font-bold text-foreground mb-6">Ready to Join?</h2>
             <p className="text-lg text-muted-foreground mb-8">

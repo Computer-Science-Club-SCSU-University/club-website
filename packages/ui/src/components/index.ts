@@ -37,7 +37,11 @@ export { AnnouncementPreviewProvider, useAnnouncementPreview } from './announcem
 export { AnnouncementCardBase } from './announcements/AnnouncementCardBase.js'
 export { AnnouncementCardPublic } from './announcements/AnnouncementCardPublic.js';
 export { AnnouncementSkeleton, AnnouncementSkeletonList } from "./announcements/AnnouncementSkeleton.js";
+export { AnnouncementCardOfficersHub } from './announcements/AnnouncementCardOfficersHub.js';
 
+// Officer components
+export { OfficerCard } from './officers/OfficerCard.js';
+export { OfficerCardSkeleton } from './officers/OfficerCardSkeleton.js';
 
 // Layout components
 // Note: Layout components with routing dependencies will be added when Next.js peer dependency is resolved 

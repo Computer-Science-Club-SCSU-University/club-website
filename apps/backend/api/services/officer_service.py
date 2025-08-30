@@ -32,7 +32,7 @@ class OfficerService:
     @staticmethod
     @transaction.atomic
     def create_officer_profile(user, officer_data):
-        """Create a new officer profile."""
+        """Create a new officer profile with user association."""
         # Check if officer profile already exists
         existing = OfficerService.get_officer_by_user(user)
         if existing:
@@ -40,9 +40,28 @@ class OfficerService:
         
         officer = Officer.objects.create(
             user=user,
+            name=officer_data['name'],
             position=officer_data['position'],
             bio=officer_data.get('bio'),
             image_url=officer_data.get('image_url'),
+            linkedin_url=officer_data.get('linkedin_url'),
+            email=officer_data.get('email'),
+            order_index=officer_data.get('order_index', 0)
+        )
+        return officer
+    
+    @staticmethod
+    @transaction.atomic
+    def create_officer_profile_without_user(officer_data):
+        """Create a new officer profile without user association (for officers hub)."""
+        officer = Officer.objects.create(
+            user=None,  # No user association for now
+            name=officer_data['name'],
+            position=officer_data['position'],
+            bio=officer_data.get('bio'),
+            image_url=officer_data.get('image_url'),
+            linkedin_url=officer_data.get('linkedin_url'),
+            email=officer_data.get('email'),
             order_index=officer_data.get('order_index', 0)
         )
         return officer
@@ -51,10 +70,10 @@ class OfficerService:
     @transaction.atomic
     def update_officer_profile(officer, officer_data):
         """Update an existing officer profile."""
-        allowed_fields = ['position', 'bio', 'image_url', 'order_index']
+        allowed_fields = ['name', 'position', 'bio', 'image_url', 'linkedin_url', 'email', 'order_index']
         
         for field, value in officer_data.items():
-            if field in allowed_fields and value is not None:
+            if field in allowed_fields:
                 setattr(officer, field, value)
         
         officer.save()
