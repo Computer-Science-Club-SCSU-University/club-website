@@ -10,9 +10,9 @@ services:
     volumes:
       - postgres_data:/var/lib/postgresql/data
     ports:
-      - "5432:5432"
+      - '5432:5432'
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      test: ['CMD-SHELL', 'pg_isready -U postgres']
       interval: 10s
       timeout: 5s
       retries: 5
@@ -38,11 +38,14 @@ services:
       - CORS_ALLOWED_ORIGINS=${CORS_ALLOWED_ORIGINS:-http://localhost:3000,http://localhost:3001}
       - CLERK_PUBLISHABLE_KEY=${CLERK_PUBLISHABLE_KEY:-pk_test_ZW5kbGVzcy1ob3JzZS0xNi5jbGVyay5hY2NvdW50cy5kZXYk}
       - CLERK_SECRET_KEY=${CLERK_SECRET_KEY:-sk_test_s8Tne4KHRtXVVUFfhdNUdeWKtywSwjxaf0mwwyck9E}
+      # Google Calendar integration
+      - GOOGLE_SERVICE_ACCOUNT_JSON_B64=${GOOGLE_SERVICE_ACCOUNT_JSON_B64}
+      - GOOGLE_CALENDAR_ID=${GOOGLE_CALENDAR_ID}
     volumes:
       - ./apps/api:/app
       - /app/__pycache__
     ports:
-      - "8000:8000"
+      - '8000:8000'
     depends_on:
       db:
         condition: service_healthy
@@ -64,7 +67,7 @@ services:
       - /workspace/apps/public-website/node_modules
       - /workspace/apps/public-website/.next
     ports:
-      - "3000:3000"
+      - '3000:3000'
     depends_on:
       - api
     networks:
@@ -88,7 +91,7 @@ services:
       - /workspace/apps/officers-hub/node_modules
       - /workspace/apps/officers-hub/.next
     ports:
-      - "3001:3001"
+      - '3001:3001'
     depends_on:
       - api
     networks:

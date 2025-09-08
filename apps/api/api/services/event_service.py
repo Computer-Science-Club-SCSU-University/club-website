@@ -1,8 +1,6 @@
 from django.db import transaction
 from django.utils import timezone
 from api.models import Event
-
-
 class EventService:
     """
     Service layer for Event operations.
@@ -69,3 +67,4 @@ class EventService:
         return Event.objects.annotate(
             rsvp_count=Count('rsvps')
         ).select_related('created_by').order_by('event_date') 
+        

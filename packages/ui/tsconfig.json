@@ -1,11 +1,14 @@
 {
-  "extends": "@club-website/typescript-config/react-library.json",
-  "compilerOptions": {
-    "baseUrl": ".",
-    "paths": {
-      "@club-website/ui/*": ["./src/*"]
-    }
-  },
-  "include": ["."],
-  "exclude": ["node_modules", "dist"]
+	"extends": "@club-website/typescript-config/react-library.json",
+	"compilerOptions": {
+		"baseUrl": ".",
+		"paths": {
+			"@club-website/ui/*": ["./src/*"]
+		},
+		"module": "ESNext",
+		"moduleResolution": "bundler",
+		"types": ["react", "react-dom"]
+	},
+	"include": ["."],
+	"exclude": ["node_modules", "dist"]
 }

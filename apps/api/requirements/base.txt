@@ -7,3 +7,5 @@ pytz>=2023.3
 PyJWT>=2.6.0
 psycopg2-binary>=2.9.0
 dj-database-url>=2.0.0
+google-api-python-client>=2.140.0
+google-auth>=2.35.0
