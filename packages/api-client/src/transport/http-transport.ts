@@ -21,7 +21,12 @@ export class HttpTransport {
     private getToken?: () => Promise<string | null>;
 
     constructor(options: TransportOptions = {}) {
-        this.baseUrl = (options.baseUrl || 'http://localhost:8000/api').replace(/\/$/, '');
+
+        const defaultBaseUrl = typeof window !== 'undefined' 
+            ? process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000/api'
+            : 'http://localhost:8000/api';
+
+        this.baseUrl = (options.baseUrl || defaultBaseUrl).replace(/\/$/, '');
         this.defaultTimeout = options.timeout || 10000;
         this.defaultRetries = options.retries || 3;
         this.getToken = options.getToken;
