@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useMemo, useEffect, useCallback } from "react";
+import { useState, useMemo, useEffect, useCallback, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 import { Navbar } from "@/components/layouts/Navbar";
 import { Footer } from "@/components/layouts/Footer";
@@ -349,7 +349,21 @@ function AnnouncementsContent() {
 export default function AnnouncementsPage() {
   return (
     <AnnouncementPreviewProvider>
-      <AnnouncementsContent />
+       <Suspense fallback={
+        <div className="min-h-screen flex flex-col">
+          <Navbar />
+          <main className="flex-1 pt-16">
+            <div className="container mx-auto px-4 py-16">
+              <div className="text-center">
+                <p className="text-muted-foreground">Loading announcements...</p>
+              </div>
+            </div>
+          </main>
+          <Footer />
+        </div>
+      }>
+        <AnnouncementsContent />
+      </Suspense>
     </AnnouncementPreviewProvider>
   );
 } 

@@ -194,11 +194,19 @@ export default function EventCreateEditor() {
     }
     
     // Validate that end time is after start time
-    const startDateTime = new Date(startDate);
-    startDateTime.setHours(parseInt(startTime.split(':')[0]), parseInt(startTime.split(':')[1]));
+    if (!startTime || !endTime) {
+      toast.error('Please select both start and end times');
+      return;
+    }
     
+    const [startHour, startMin] = startTime.split(':').map(Number) as [number, number];;
+    const [endHour, endMin] = endTime.split(':').map(Number) as [number, number];;
+
+    const startDateTime = new Date(startDate);
+    startDateTime.setHours(startHour, startMin);
+
     const endDateTime = new Date(endDate);
-    endDateTime.setHours(parseInt(endTime.split(':')[0]), parseInt(endTime.split(':')[1]));
+    endDateTime.setHours(endHour, endMin);
     
     if (startDateTime >= endDateTime) {
       toast.error('End time must be after start time');

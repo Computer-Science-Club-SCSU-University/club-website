@@ -270,11 +270,19 @@ export default function EventEditEditor({ eventId }: EventEditEditorProps) {
     }
     
     // Validate that end time is after start time
-    const startDateTime = new Date(startDate);
-    startDateTime.setHours(parseInt(startTime.split(':')[0]), parseInt(startTime.split(':')[1]));
+    if (!startTime || !endTime) {
+      toast.error('Please select both start and end times');
+      return;
+    }
     
+    const [startHour, startMin] = startTime.split(':').map(Number) as [number, number];;
+    const [endHour, endMin] = endTime.split(':').map(Number) as [number, number];;
+
+    const startDateTime = new Date(startDate);
+    startDateTime.setHours(startHour, startMin);
+
     const endDateTime = new Date(endDate);
-    endDateTime.setHours(parseInt(endTime.split(':')[0]), parseInt(endTime.split(':')[1]));
+    endDateTime.setHours(endHour, endMin);
     
     if (startDateTime >= endDateTime) {
       toast.error('End time must be after start time');
@@ -287,12 +295,15 @@ export default function EventEditEditor({ eventId }: EventEditEditorProps) {
   // Helper function to compare datetime values properly
   const isSameDateTime = (date1: Date | undefined, time1: string, date2: Date | undefined, time2: string): boolean => {
     if (!date1 || !date2) return date1 === date2 && time1 === time2;
+
+    const [h1, m1] = time1.split(':').map(Number) as [number, number];
+    const [h2, m2] = time2.split(':').map(Number) as [number, number];
     
     const dt1 = new Date(date1);
-    dt1.setHours(parseInt(time1.split(':')[0]), parseInt(time1.split(':')[1]), 0, 0);
+    dt1.setHours(h1, m1, 0, 0);
     
     const dt2 = new Date(date2);
-    dt2.setHours(parseInt(time2.split(':')[0]), parseInt(time2.split(':')[1]), 0, 0);
+    dt2.setHours(h2, m2, 0, 0);
     
     return dt1.getTime() === dt2.getTime();
   };

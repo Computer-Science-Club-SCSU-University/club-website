@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { createPublicClient, type Event, ApiError } from '@club-website/api-client';
+import { usePublicApiClient, type Event, ApiError } from '@/lib/api';
 
 interface UseUpcomingEventsReturn {
   events: Event[];
@@ -11,6 +11,7 @@ export function useUpcomingEvents(): UseUpcomingEventsReturn {
   const [events, setEvents] = useState<Event[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const client = usePublicApiClient();
 
   useEffect(() => {
     const fetchEvents = async () => {
@@ -18,7 +19,6 @@ export function useUpcomingEvents(): UseUpcomingEventsReturn {
         setLoading(true);
         setError(null);
         
-        const client = createPublicClient();
         const events = await client.events.getAll();
         
         // Filter upcoming events
@@ -43,7 +43,7 @@ export function useUpcomingEvents(): UseUpcomingEventsReturn {
     };
 
     fetchEvents();
-  }, []);
+  }, [client]);
 
   return { events, loading, error };
 } 

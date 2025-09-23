@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from 'react';
-import { createPublicClient, type Announcement, ApiError } from '@club-website/api-client';
+import { usePublicApiClient, type Announcement, ApiError } from '@/lib/api';
 
 interface UseAnnouncementsReturn {
   announcements: Announcement[];
@@ -14,12 +14,12 @@ export function useAnnouncements(): UseAnnouncementsReturn {
   const [announcements, setAnnouncements] = useState<Announcement[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const client = usePublicApiClient();
 
   useEffect(() => {
     const fetchAnnouncements = async () => {
       try {
         setLoading(true);
-        const client = createPublicClient();
         const data = await client.announcements.getAll();
         setAnnouncements(data);
       } catch (err) {
@@ -34,7 +34,7 @@ export function useAnnouncements(): UseAnnouncementsReturn {
     };
 
     fetchAnnouncements();
-  }, []);
+  }, [client]);
 
   const pinnedAnnouncement = announcements.find(a => a.isPinned) || null;
 

@@ -9,6 +9,7 @@ import { EventCardPublic } from "@club-website/ui/components/events/EventCardPub
 import { EventPreviewProvider } from "@club-website/ui/components/events/EventPreviewContext";
 import { EventPreview } from "@club-website/ui/components/events/EventPreview";
 import Link from "next/link";
+import { usePublicApiClient } from '@/lib/api';
 
 const EmptyState = () => (
   <div className="text-center py-12">
@@ -36,6 +37,7 @@ const EmptyState = () => (
 
 export default function EventsPage() {
   const { upcomingEvents, ongoingEvents, pastEvents, loading, error } = useEvents();
+  const apiClient = usePublicApiClient();
   const [activeTab, setActiveTab] = useState<'upcoming' | 'ongoing' | 'past'>('upcoming');
 
   const filteredEvents = 
@@ -128,7 +130,7 @@ export default function EventsPage() {
       </div>
       
       {/* Event Preview Modal */}
-      <EventPreview />
+      <EventPreview apiClient={apiClient} />
     </EventPreviewProvider>
   );
 } 
