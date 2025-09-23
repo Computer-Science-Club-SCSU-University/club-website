@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from 'react';
-import { createPublicClient, type Officer, ApiError } from '@club-website/api-client';
+import { usePublicApiClient, type Officer, ApiError } from '@/lib/api';
 
 interface UseOfficersReturn {
   officers: Officer[];
@@ -13,6 +13,7 @@ export function useOfficers(): UseOfficersReturn {
   const [officers, setOfficers] = useState<Officer[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const client = usePublicApiClient();
 
   useEffect(() => {
     const fetchOfficers = async () => {
@@ -20,7 +21,6 @@ export function useOfficers(): UseOfficersReturn {
         setLoading(true);
         setError(null);
         
-        const client = createPublicClient();
         const officers = await client.officers.getAll();
         setOfficers(officers);
       } catch (err) {
@@ -36,7 +36,7 @@ export function useOfficers(): UseOfficersReturn {
     };
 
     fetchOfficers();
-  }, []);
+  }, [client]);
 
   return { officers, loading, error };
 } 

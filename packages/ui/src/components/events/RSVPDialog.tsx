@@ -14,7 +14,7 @@ import { Input } from '@club-website/ui/components/input';
 import { Label } from '@club-website/ui/components/label';
 import { Textarea } from '@club-website/ui/components/textarea';
 import { toast } from 'sonner';
-import { createPublicClient } from '@club-website/api-client';
+import type { ClubApiClient } from '@club-website/api-client';
 
 interface Event {
   id: string;
@@ -38,6 +38,7 @@ interface RSVPDialogProps {
   isOpen: boolean;
   onClose: () => void;
   onSuccess?: () => void;
+  apiClient: ClubApiClient;
 }
 
 interface RSVPFormData {
@@ -50,7 +51,8 @@ export function RSVPDialog({
   event, 
   isOpen, 
   onClose, 
-  onSuccess 
+  onSuccess,
+  apiClient
 }: RSVPDialogProps) {
   const [formData, setFormData] = useState<RSVPFormData>({
     name: '',
@@ -85,10 +87,7 @@ export function RSVPDialog({
     setIsLoading(true);
     
     try {
-      // Use API client instead of direct fetch
-      const apiBaseUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000/api';
-      const client = createPublicClient(apiBaseUrl);
-      await client.events.createRSVP(event.id, {
+      await apiClient.events.createRSVP(event.id, {
         name: formData.name.trim(),
         email: formData.email.trim(),
         comment: formData.comment.trim() || undefined,

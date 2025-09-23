@@ -1,0 +1,10 @@
+[build]
+builder = "NIXPACKS"
+
+[deploy]
+preDeployCommand = "python manage.py migrate --noinput && python manage.py collectstatic --noinput"
+startCommand = "mkdir -p /app/staticfiles && python manage.py collectstatic --noinput && gunicorn core.wsgi:application --bind 0.0.0.0:$PORT --workers 3 --timeout 300 --keep-alive 2 --log-level info --access-logfile -"
+healthcheckPath = "/health"
+healthcheckTimeout = 300
+restartPolicyType = "ON_FAILURE"
+restartPolicyMaxRetries = 10

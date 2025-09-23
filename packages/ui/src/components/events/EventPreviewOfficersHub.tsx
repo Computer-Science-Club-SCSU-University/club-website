@@ -175,7 +175,6 @@ export function EventPreviewOfficersHub({
   };
 
   const rsvpStats = getRsvpStats();
-  console.log(rsvpStats);
 
   return (
     <div className="space-y-8">

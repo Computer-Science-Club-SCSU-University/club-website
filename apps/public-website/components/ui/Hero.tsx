@@ -19,9 +19,6 @@ export function Hero() {
     }
   };
 
-  console.log('Pinned announcement:', pinnedAnnouncement);
-  console.log('Pinned display_text:', pinnedAnnouncement?.displayText);
-
   return (
     <LampContainer>
       <motion.div

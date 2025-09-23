@@ -1,0 +1,12 @@
+[build]
+builder = "NIXPACKS"
+buildCommand = "corepack enable && pnpm install --frozen-lockfile && pnpm --filter @club-website/officers-hub... build"
+
+[deploy]
+startCommand = "pnpm --filter @club-website/officers-hub... start"
+healthcheckTimeout = 300
+restartPolicyType = "ON_FAILURE"
+restartPolicyMaxRetries = 10
+
+[environments.production]
+variables = { NODE_ENV = "production" }

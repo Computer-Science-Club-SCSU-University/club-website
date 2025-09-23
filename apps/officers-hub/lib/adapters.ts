@@ -102,13 +102,13 @@ export function toCreateEventRequest(data: {
   
   return {
     title: data.title,
-    description: data.description || null,
-    location: data.location || null,
+    description: data.description || undefined,
+    location: data.location || undefined,
     start_at: startDateTime.toISOString(),
     end_at: endDateTime.toISOString(),
-    meeting_link: data.meetingLink || null,
-    slides_url: data.slidesUrl || null,
-    recording_url: null // Only for past events during editing
+    meeting_link: data.meetingLink || undefined,
+    slides_url: data.slidesUrl || undefined,
+    recording_url: undefined // Only for past events during editing
   };
 }
 

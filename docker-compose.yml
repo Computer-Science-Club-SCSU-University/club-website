@@ -23,6 +23,7 @@ services:
   api:
     build:
       context: ./apps/api
+      dockerfile: Dockerfile.dev
       target: development
     container_name: cs-club-api
     environment:

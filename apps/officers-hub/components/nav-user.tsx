@@ -51,8 +51,6 @@ export function NavUser() {
   const email = user.primaryEmailAddress?.emailAddress || "No email"
   const displayName = firstName || fullName.split(' ')[0] || "Officer"
 
-  console.log(`firstName: ${firstName}`)
-
   return (
     <SidebarMenu>
       <SidebarMenuItem>

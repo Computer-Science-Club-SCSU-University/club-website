@@ -17,6 +17,16 @@ class ClerkAuthMiddleware:
         self.get_response = get_response
 
     def __call__(self, request):
+        # Skip auth for system endpoints (health checks)
+        system_paths = [
+            '/health',
+            '/health/',
+        ]
+
+        if request.path.startswith('/health') or request.path.startswith('/admin/'):
+            request.user = None
+            return self.get_response(request)
+        
         # Skip auth for public web app endpoints (GET requests only)
         public_read_paths = [
             '/api/events',

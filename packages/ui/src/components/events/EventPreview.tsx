@@ -21,6 +21,7 @@ import {
 } from 'lucide-react';
 import { useEventPreview } from '@club-website/ui/components/events/EventPreviewContext';
 import { RSVPDialog } from '@club-website/ui/components/events/RSVPDialog';
+import type { ClubApiClient } from '@club-website/api-client';
 
 // Simple markdown-like text renderer for basic formatting (copied from AnnouncementPreview)
 function renderMarkdownText(text: string) {
@@ -92,8 +93,11 @@ interface Event {
   updatedAt: Date;
 }
 
+interface EventPreviewProps {
+  apiClient: ClubApiClient;
+}
 
-export function EventPreview() {
+export function EventPreview({ apiClient }: EventPreviewProps) {
   const { isOpen, event, closePreview } = useEventPreview();
   const [recordingsExpanded, setRecordingsExpanded] = useState(false);
   const [slidesExpanded, setSlidesExpanded] = useState(false);
@@ -314,6 +318,7 @@ export function EventPreview() {
             setIsRSVPDialogOpen(false);
             // Optionally refresh event data or show success message
           }}
+          apiClient={apiClient}
         />
       )}
     </Dialog>
