@@ -13,26 +13,26 @@
   },
   "dependencies": {
     "@clerk/nextjs": "^6.25.4",
+    "@club-website/api-client": "workspace:*",
+    "@club-website/api-contracts": "workspace:*",
+    "@club-website/domain-types": "workspace:*",
+    "@club-website/ui": "workspace:*",
     "@uiw/react-markdown-preview": "^5.1.5",
     "@uiw/react-md-editor": "^4.0.8",
-    "@club-website/ui": "workspace:*",
-    "@club-website/api-client": "workspace:*",
-    "@club-website/domain-types": "workspace:*",
-    "@club-website/api-contracts": "workspace:*",
     "lucide-react": "^0.475.0",
     "motion": "^12.23.6",
-    "next": "^15.2.3",
+    "next": "^15.2.8",
     "next-themes": "^0.4.4",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "sonner": "^2.0.6"
   },
   "devDependencies": {
+    "@club-website/eslint-config": "workspace:*",
+    "@club-website/typescript-config": "workspace:*",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
-    "@club-website/eslint-config": "workspace:*",
-    "@club-website/typescript-config": "workspace:*",
     "typescript": "^5.7.3"
   }
 }
